@@ -1,0 +1,29 @@
+<mdb-card cascade="true">
+  <div class="view view-cascade overlay waves-light" mdbWavesEffect>
+      <img class = "img-fluid" [src]="_movie.poster">
+      <a> <div class="mask rgba-white-slight"></div></a>
+  </div>
+  <mdb-card-body cascade="true" class="text-center">
+    <h6 class="card-title">
+      <strong>{{_movie.title | title | limit:15:12}}</strong>
+      <span> {{'('+_movie.year+')'}}</span>
+    </h6>
+    <h6>{{_movie.director | director|limit:21:18}}</h6>
+    <mdb-card-text>
+      <span class ="runtime">{{_movie.runtime | runtime}}</span> <br>
+      <span class = "genres">{{genres | limit:30:27}}</span>
+    </mdb-card-text>
+    <button (click) = "editMovie(_movie.id)" mdbBtn color="info" rounded="true" outline="true" mdbWavesEffect>Edit</button>
+    <button (click) = "deleteMovie(_movie.id)" mdbBtn type="button" color="danger" rounded="true" outline="true" mdbWavesEffect>Delete</button>
+  </mdb-card-body>
+</mdb-card>
+
+
+
+
+
+
+
+
+
+

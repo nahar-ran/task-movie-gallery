@@ -1,0 +1,32 @@
+import { AfterContentInit, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { MdbOptionComponent } from './mdb-option.component';
+import { ISelectedOption } from '../interfaces/selected-option.interface';
+import { Observable } from 'rxjs';
+export declare class MdbAutoCompleterComponent implements OnInit, AfterContentInit {
+    private renderer;
+    textNoResults: string;
+    clearButton: boolean;
+    clearButtonTabIndex: number;
+    optionList: Array<any>;
+    mdbOptions: MdbOptionComponent[];
+    dropdown: ElementRef;
+    private _allItems;
+    private _isOpen;
+    private _selectedItemIndex;
+    private _selectedItem;
+    private _selectedItemChanged;
+    constructor(renderer: Renderer2);
+    onItemClick(): void;
+    setSelectedItem(item: ISelectedOption): void;
+    getSelectedItem(): ISelectedOption;
+    selectedItemChanged(): Observable<any>;
+    isOpen(): boolean;
+    show(): void;
+    hide(): void;
+    removeHighlight(index: number): void;
+    highlightRow(index: number): void;
+    navigateUsingKeyboard(event: any): void;
+    moveHighlightedIntoView(type: string): void;
+    ngOnInit(): void;
+    ngAfterContentInit(): void;
+}

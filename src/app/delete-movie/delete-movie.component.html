@@ -1,0 +1,16 @@
+<div mdbModal #delete="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 *ngIf ="_movie" class="modal-title w-100" id="myModalLabel">Delete {{_movie.title}}</h4>
+      </div>
+      <div class="modal-body">
+        <button mdbBtn type="button" color="success" rounded="true" (click) = "deleteMovie()" mdbWavesEffect>Delete</button>
+        <button mdbBtn type="button" color="danger" rounded="true" (click) = "delete.hide()" mdbWavesEffect>Cancel</button>
+      </div>  
+    </div>
+  </div>
+</div>  

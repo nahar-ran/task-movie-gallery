@@ -1,0 +1,71 @@
+<div mdbModal *ngIf="_movie" #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <form *ngIf="editForm" [formGroup]="editForm">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header peach-gradient text-center">
+          <h4 class="modal-title w-100 font-weight-bold">{{_movie.title}}</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+          <div class="row">
+            <div class="col-8">
+              <div class="md-form mb-5">
+                <label for="title">title</label>
+                <input id="title" mdbValidate formControlName="title" class="form-control validate" mdbInputDirective />
+                <mdb-error *ngIf="editForm.controls.title.errors && editForm.controls.title.errors.required && (editForm.controls.title.dirty || editForm.controls.title.touched)">
+                  This field is required </mdb-error>
+                <mdb-error *ngIf="editForm.controls.title.errors && editForm.controls.title.errors.unAvailable && (editForm.controls.title.dirty || editForm.controls.title.touched)">
+                  This movie title already exist, please choose a diffrent one. </mdb-error>
+              </div>
+              <div class="md-form mb-5">
+                <label for="defaultForm-email">year</label>
+                <input formControlName="year" type="number" mdbValidate class="form-control validate" mdbInputDirective />
+                <mdb-error *ngIf="editForm.controls.year.errors && editForm.controls.year.errors.required && (editForm.controls.year.dirty || editForm.controls.year.touched)">
+                  This field is required with numbers only </mdb-error>
+                <mdb-error *ngIf="editForm.controls.year.errors && editForm.controls.year.errors.range && !editForm.controls.year.errors.pattern && !editForm.controls.year.errors.required && (editForm.controls.year.dirty || editForm.controls.year.touched)">
+                  Valid years are between 1888 - 2019 </mdb-error>
+                  <mdb-error *ngIf="editForm.controls.year.errors && editForm.controls.year.errors.pattern && !editForm.controls.year.errors.required && (editForm.controls.year.dirty || editForm.controls.year.touched)">
+                      Please use numbers only </mdb-error>    
+              </div>
+              <div class="md-form mb-5">
+                <label for="defaultForm-email">Runtime (in minutes)</label>
+                <input formControlName="runtime" mdbValidate type="number" class="form-control validate"
+                  mdbInputDirective />
+                <mdb-error *ngIf="editForm.controls.runtime.invalid && (editForm.controls.runtime.dirty || editForm.controls.runtime.touched)">
+                  This field is required </mdb-error>
+
+              </div>
+              <div class="md-form mb-5">
+                <mdb-error *ngIf="genreMessage && !editForm.controls.genres.errors" class="error-genre">This genre is
+                  already in the list </mdb-error>
+                <mdb-error *ngIf="editForm.controls.genres.errors" class="error-genre">
+                  At least one genre is required</mdb-error>
+                <mdb-select placeholder="Add/Remove genres" [options]="genreList"
+                  mdbValidate #curGenre formArraylName="genres"></mdb-select>
+                <i (click)="addGenre(curGenre)" class="fa fa-plus" aria-hidden="true"></i>
+                <h7 class="genreList">{{ getGenres(editForm.controls.genres.value) }} </h7>
+                <i (click)="removeGenre()" class="fa fa-arrow-left"></i>
+              </div>
+              <div class="md-form mb-5">
+                <label for="defaultForm-email">director</label>
+                <input mdbValidate formControlName="director" class="form-control validate" mdbInputDirective/>
+                <mdb-error *ngIf="editForm.controls.director.invalid && (editForm.controls.director.dirty || editForm.controls.director.touched)">
+                  This field is required </mdb-error>
+              </div>
+            </div>
+            <div class="col-4">
+              <img class="img-fluid" [src]="_movie.poster"/>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button mdbBtn type="button" color="success" rounded="true" (click)="submitForm()" mdbWavesEffect>Save</button>
+          <button mdbBtn type="button" color="danger" rounded="true" (click)="frame.hide()" mdbWavesEffect>Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

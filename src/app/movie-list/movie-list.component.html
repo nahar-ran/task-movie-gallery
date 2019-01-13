@@ -1,0 +1,13 @@
+<div *ngIf='movies.length > 0' class="container cards">
+  <div class = "row">
+    <div class="col-md-5 col-lg-3 col-sm-6 col-xs-7 card-inner" *ngFor="let mov of movies">
+      <app-movie (deleteEvent) = "showDelete(mov)" (editEvent) = "showEdit(mov)" [movie]="mov"></app-movie>
+    </div>
+    <div class="col-md-3 col-lg-3 col-sm-5 col-xs-7 card-inner">
+        <img (click) = "showAdd()" style = "display:inline-block" src = "../../assets/plus2.png"/>
+    </div>
+  </div>
+  <edit-movie (onHide) = "hideEdit()" [movie] = "editMovie"></edit-movie>
+  <add-movie (onHide) = "hideAdd()" [showAddModal] ="showAddModal"></add-movie>
+  <delete-movie (onHide) = "hideDelete()"  [movie] = "deleteMovie"> </delete-movie>
+</div>

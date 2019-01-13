@@ -1,0 +1,60 @@
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+  aria-labelledby="myModalLabel" aria-hidden="true">
+  <form *ngIf = "addForm" [formGroup] = "addForm"  #formEl = "ngForm">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header peach-gradient text-center">
+          <h4 class="modal-title w-100 font-weight-bold">New Movie</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body mx-3">
+          <div class = "row">
+            <div class="col-8">
+              <div class="md-form mb-5">
+                <label for="title">title</label>
+                <input id = "title" mdbValidate formControlName="title" class="form-control validate" mdbInputDirective/>
+                <mdb-error *ngIf="addForm.controls.title.errors && addForm.controls.title.errors.required && formEl.submitted"> This field is required </mdb-error>
+                <mdb-error *ngIf="addForm.controls.title.errors && addForm.controls.title.errors.unAvailable && formEl.submitted"> This movie title already exist, please choose a diffrent one. </mdb-error>
+              </div>
+              <div class="md-form mb-5">
+                <label for="defaultForm-email">year</label>
+                <input formControlName = "year" mdbValidate class="form-control validate" mdbInputDirective/>
+                <mdb-error *ngIf="addForm.controls.year.errors && addForm.controls.year.errors.required && formEl.submitted"> This field is required </mdb-error>
+                <mdb-error *ngIf="addForm.controls.year.errors && addForm.controls.year.errors.range && !addForm.controls.year.errors.required &&formEl.submitted"> Valid years are between 1888 - 2019 </mdb-error>
+              </div>
+              <div class="md-form mb-5">
+                <label for="defaultForm-email">Runtime (in minutes)</label>
+                <input formControlName = "runtime" mdbValidate class="form-control validate" mdbInputDirective/>
+                <mdb-error *ngIf="addForm.controls.runtime.errors && addForm.controls.runtime.errors.required && formEl.submitted"> This field is required </mdb-error>
+                <mdb-error *ngIf="addForm.controls.runtime.errors && addForm.controls.runtime.errors.pattern && !addForm.controls.runtime.errors.required &&formEl.submitted"> Run-time requies only numbers </mdb-error>
+              </div>            
+              <div class="md-form mb-5">
+                  <mdb-error *ngIf="genreMessage && !addForm.controls.genres.errors" class = "error-genre">This genre is already in the list </mdb-error>
+                  <mdb-error *ngIf="addForm.controls.genres.errors && formEl.submitted" class = "error-genre">At least one genre is required </mdb-error>
+                  <mdb-select placeholder = "Add/Remove genres" [options]="genreList" mdbValidate #curGenre formArraylName="genres"></mdb-select>
+                  <i (click) = "addGenre(curGenre)" class="fa fa-plus" aria-hidden="true"></i>                    
+                  <h7 class = "genreList">{{ getGenres(addForm.controls.genres.value) }} </h7>
+                  <i (click) = "removeGenre()" class="fa fa-arrow-left"></i>
+              </div>
+              <div class="md-form mb-5">
+                <label for="defaultForm-email">director</label>
+                <input mdbValidate formControlName = "director" class="form-control validate" mdbInputDirective/>
+                <mdb-error *ngIf="addForm.controls.director.invalid && formEl.submitted"> This field is required </mdb-error>
+              </div>
+            </div>  
+            <div class="col-4">
+              <button *ngIf = "addForm.controls.title.dirty" (click) = "getDetails()" mdbBtn type="button" color="elegant" class = "round-btn" rounded="true" mdbWavesEffect>Load Movie Details</button>
+              <span *ngIf = "movieNotFound"> Movie not found</span>
+            </div>      
+          </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <button mdbBtn [disabled] = "submitted" type="button" color="success" rounded="true" type = "submit" (click) = "submitForm()" mdbWavesEffect>Save</button>
+          <button mdbBtn type="button" color="danger" rounded="true" (click) = "frame.hide()" mdbWavesEffect>Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div> 

@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-md-12"> 
+        <ul class="nav peach-gradient justify-content-center lighten-3 py-2 mb-r font-weight-bold z-depth-1">
+            <li class="nav-item">
+                    <button mdbBtn (click) = "showAdd()" type="button" color="elegant" rounded="true" class="waves-light" mdbWavesEffect>Add New Movie!</button>
+            </li>
+        </ul>
+    </div>
+</div>
+<add-movie (onHide) = "hideAdd()" [showAddModal] ="showAddModal"></add-movie>
+
+    
