@@ -1,6 +1,6 @@
 .img-fluid{
     height:215px !important;
-    width:390px !important;
+    width:100% !important;
 }
 
 .genres,.runtime{
